@@ -7,7 +7,7 @@ const someController = require('../controllers/someController');
 module.exports = () => {
   const controller = someController();
 
-  router.route('/').get(controller.get);
+  router.route('/').post(controller.post);
 
   return router;
 };
