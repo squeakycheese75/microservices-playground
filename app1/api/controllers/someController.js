@@ -1,12 +1,16 @@
-// const { loadCharacters } = require('../helpers/charactersHelpers'
-const send = require('../../send');
+const send = require('../helpers/busHelper');
 
 function someController() {
-  async function get(req, res) {
-    send('Hello', 'Hello World!');
+  async function post(req, res) {
+    const msg = req.body;
+    const queue = 'Hello';
+
+    send(queue, JSON.stringify(msg));
+    const resval = { Status: 'Ok' };
+    res.send(JSON.stringify(resval));
   }
 
-  return { get };
+  return { post };
 }
 
 module.exports = someController;
