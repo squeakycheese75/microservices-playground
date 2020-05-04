@@ -15,6 +15,14 @@ services:
     restart: on-failure
     depends_on:
       - "rabbitmq"
+  app3:
+    container_name: app3
+    build: app3/
+    command: ["./main"]
+    restart: on-failure
+    depends_on:
+      - "rabbitmq"
+
   rabbitmq:
     container_name: rabbitmq
     image: rabbitmq
