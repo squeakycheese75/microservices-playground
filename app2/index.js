@@ -1,8 +1,18 @@
-var amqp = require('amqplib/callback_api');
+const express = require('express')
+const amqp = require('amqplib/callback_api');
+const app = express()
+
+
+var messages = []
+
+app.get('/hello', function (req, res) {
+  res.json({"messages": messages})
+})
+app.listen(5000)
 
 amqp.connect('amqp://rabbitmq', function (error0, connection) {
   if (error0) {
-    throw error0;
+    throw  error0;
   }
   connection.createChannel(function (error1, channel) {
     if (error1) {
@@ -21,6 +31,7 @@ amqp.connect('amqp://rabbitmq', function (error0, connection) {
       queue,
       function (msg) {
         console.log(' [x] Received %s', msg.content.toString());
+        messages.push(JSON.parse(msg.content.toString()));
       },
       {
         noAck: true,
@@ -28,3 +39,5 @@ amqp.connect('amqp://rabbitmq', function (error0, connection) {
     );
   });
 });
+
+

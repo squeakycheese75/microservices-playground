@@ -1,7 +1,7 @@
 const amqp = require('amqplib/callback_api');
 
 async function sendMessage(queue, msg) {
-  amqp.connect('amqp://localhost', (error0, connection) => {
+  amqp.connect('amqp://rabbitmq', (error0, connection) => {
     if (error0) {
       throw error0;
     }
@@ -20,7 +20,6 @@ async function sendMessage(queue, msg) {
     });
     setTimeout(() => {
       connection.close();
-      process.exit(0);
     }, 500);
   });
 }
