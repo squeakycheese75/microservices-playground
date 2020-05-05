@@ -35,6 +35,7 @@ amqp.connect('amqp://rabbitmq', function(error0, connection) {
       channel.consume(q.queue, function(msg) {
         if(msg.content) {
             console.log(" [x] App2 received a message %s", msg.content.toString());
+            messages.push(JSON.parse(msg.content.toString()));
           }
       }, {
         noAck: true
