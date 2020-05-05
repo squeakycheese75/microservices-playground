@@ -10,13 +10,14 @@ async function sendMessage(queue, msg) {
         throw error1;
       }
 
-      channel.assertQueue(queue, {
-        durable: false,
+      var exchange = 'Hello';
+      channel.assertExchange(exchange, 'fanout', {
+        durable: false
       });
-      channel.sendToQueue(queue, Buffer.from(msg));
 
+      channel.publish(exchange, '', Buffer.from(msg));
       // eslint-disable-next-line no-console
-      console.log(' [x] Sent %s', msg);
+      console.log(' [x] App1 sent %s', msg);
     });
     setTimeout(() => {
       connection.close();
