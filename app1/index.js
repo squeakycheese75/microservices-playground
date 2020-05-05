@@ -17,7 +17,7 @@ app.use('/api/someRoute', someRoute);
 
 app.listen(port, () => {
   // eslint-disable-next-line no-console
-  console.log(`Example app1 listening at http://localhost:${port}`);
+  console.log(` [*] App1 listening at http://localhost:${port}`);
 });
 
 module.exports = app;
